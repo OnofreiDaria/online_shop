@@ -1,5 +1,9 @@
 <template>
   <div class="v-catalog">
+    <router-link :to="{name: 'cart', params: {cart_data: CART} }">
+      <div class="v-catalog__link_to_cart">Cart: {{CART.length}}</div>
+    </router-link>
+
     <h1>Catalog</h1>
     <div class="v-catalog__list">
       <vCatalogItem v-for="product in PRODUCTS"
@@ -16,12 +20,14 @@ import vCatalogItem from './v-catalog-item'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  name: "v-catalog",
+  name: "vCatalog",
   data() {
     return  {}
   },
   computed: {
-    ...mapGetters(['PRODUCTS'])
+    ...mapGetters([
+        'PRODUCTS',
+      'CART'])
   },
   methods: {
     ...mapActions ([
@@ -53,6 +59,13 @@ export default {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+  }
+  &__link_to_cart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: $padding*2;
+    border:1px solid #aeaeae;
   }
 }
 </style>

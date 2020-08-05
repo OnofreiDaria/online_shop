@@ -40,9 +40,7 @@ name: "v-cart-item",
       this.$emit('increment')
     }
   },
-  mounted() {
-    this.$set(this.cart_item_data, 'quantity', 1);
-  }
+
 }
 </script>
 

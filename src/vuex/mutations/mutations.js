@@ -1,4 +1,12 @@
 export default {
+  SWITCH_DESKTOP: (state) => {
+    state.isDesktop = true;
+    state.isMobile = false
+  },
+  SWITCH_MOBILE: (state) => {
+    state.isDesktop = false;
+    state.isMobile = true
+  },
   SET_PRODUCTS_TO_STATE: (state, products) => state.products = products,
   SET_CART: (state, product) => {
     let isProductExists = false;

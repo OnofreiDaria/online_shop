@@ -1,40 +1,43 @@
 <template>
   <div id="app">
     <vMainWrapper/>
-    <vSelect
-        :options="options"
-        @select="optionSelect"
-        :selected="selected"
-    />
-    <p>Selected option goes here: {{ selected }}</p>
   </div>
 </template>
 
 <script>
 import vMainWrapper from './components/v-main-wrapper'
-import vSelect from './components/v-select'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'App',
   data() {
     return {
-      options: [
-        { name: 'Option 1', value: 1 },
-        { name: 'Option 2', value: 2 },
-        { name: 'Option 3', value: 3 },
-        { name: 'Option 4', value: 4 },
-        { name: 'Option 5', value: 5 }
-      ],
-      selected: 'Select'
+
     }
+  },
+  computed: {
+    ...mapGetters([
+      'IS_MOBILE',
+      'IS_DESKTOP'
+    ])
   },
   methods: {
-    optionSelect(option) {
-      this.selected = option.name;
-    }
+    ...mapActions([
+        'SET_MOBILE',
+        'SET_DESKTOP'
+    ])
+  },
+  mounted() {
+    let vm = this;
+    window.addEventListener('resize', function () {
+      if(window.innerWidth > 767) {
+        vm.SET_DESKTOP()
+      } else {
+        vm.SET_MOBILE()
+      }
+    })
   },
   components: {
-    vMainWrapper,
-    vSelect
+    vMainWrapper
   }
 }
 </script>
